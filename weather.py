@@ -1,5 +1,6 @@
 from flask import Flask, request
 import pandas as pd
+import numpy as np
 import requests
 import random
 import json
@@ -91,28 +92,28 @@ def random_cities():
     API_KEY = '3bc9b1c2c07e4f4dad648c37e3039f3a'
 
     campogrande = ['Corguinho', 'Bandeirantes', 'Rochedo', 'Ribas do Rio Pardo', 'Terenos',
-                   'Jaraguari', 'Dois Irmãos do Buriti', 'Sidrolândia', 'Nova Alvorada do Sul']
+                   'jaraguari', 'dois irmãos do buriti', 'Sidrolândia', 'nova alvorada do sul']
 
-    grandedourados = ['Maracaju', 'Rio Brilhante', 'Itaporã', 'Douradina', 'Dourados', 'Jateí',
-                      'Fátima do Sul', 'Deodápolis', 'Caarapó', 'Vicentina', 'Glória de Dourados']
+    grandedourados = ['Maracaju', 'Rio Brilhante', 'Itaporã', 'douradina', 'Dourados', 'jateí',
+                      'fátima do sul', 'deodápolis', 'Caarapó', 'Vicentina', 'glória de dourados']
 
-    bolsao = ['Juti', 'Naviraí', 'Itaquiraí', 'Iguatemi', 'Japorã', 'Eldorado', 'Mundo Novo']
+    bolsao = ['Juti', 'Naviraí', 'itaquiraí', 'Iguatemi', 'Japorã', 'Eldorado', 'Mundo Novo']
 
-    conesul = ['Chapadão do Sul', 'Cassilândia', 'Paraíso das Águas', 'Inocência', 'Paranaíba',
+    conesul = ['chapadão do sul', 'Cassilândia', 'Paraíso das Águas', 'inocência', 'Paranaíba',
                'Aparecida do Taboado', 'Água Clara', 'Três Lagoas', 'Santa Rita do Pardo', 'Brasilândia']
 
     pantanal = ['Corumbá', 'Ladário', 'Miranda', 'Aquidauana', 'Anastácio']
 
-    leste = ['Bataguassu', 'Nova Andradina', 'Angélica', 'Ivinhema', 'Novo Horizonte do Sul',
-             'Anaurilândia', 'Bataiporã', 'Taquarussu']
+    leste = ['bataguassu', 'Nova Andradina', 'Angélica', 'ivinhema', 'novo horizonte do sul',
+             'anaurilândia', 'Bataiporã', 'Taquarussu']
 
-    norte = ['Sonora', 'Pedro Gomes', 'Coxim', 'Rio Verde de Mato Grosso', 'São Gabriel do Oeste',
-             'Rio Negro', 'Camapuã', 'Alcinópolis', 'Costa Rica', 'Figueirão']
+    norte = ['Sonora', 'Pedro Gomes', 'Coxim', 'Rio Verde de Mato Grosso', 'são gabriel do oeste',
+             'Rio Negro', 'Camapuã', 'alcinópolis', 'Costa Rica', 'Figueirão']
 
-    sudoeste = ['Porto Murtinho', 'Bonito', 'Bodoquena', 'Caracol', 'Jardim', 'Bela Vista', 'Nioaque',
+    sudoeste = ['Porto Murtinho', 'Bonito', 'bodoquena', 'Caracol', 'Jardim', 'Bela Vista', 'Nioaque',
                 'Guia Lopes da Laguna']
 
-    sulfronteira = ['Antônio João', 'Ponta Porã', 'Laguna Carapã', 'Aral Moreira', 'Amambai',
+    sulfronteira = ['antônio joão', 'Ponta Porã', 'Laguna Carapã', 'Aral Moreira', 'Amambai',
                     'Coronel Sapucaia', 'Taçuru', 'Paranhos', 'Sete Quedas']
 
     regioes = ['campogrande', 'grandedourados', 'bolsao', 'conesul', 'pantanal', 'leste',
@@ -151,9 +152,9 @@ def random_cities():
             municipio = [city.title()]
             municipios = pd.read_csv("municipios_rmc.csv")
             lat = municipios['latitude'].loc[municipios['nome'].isin(municipio)]
-            lat = float(lat.values)
+            lat = float(lat)
             lon = municipios['longitude'].loc[municipios['nome'].isin(municipio)]
-            lon = float(lon.values)
+            lon = float(lon)
             url3 = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&APPID={API_KEY}'
             response_2 = requests.get(url3).json()
             current_temperature = response_2.get('main', {}).get('temp')
