@@ -1,0 +1,221 @@
+"codigo_ibge","nome","latitude","longitude","capital","codigo_uf"
+5100102,Acorizal,-15.194,-56.3632,false,51
+5100201,Água Boa,-14.051,-52.1601,false,51
+5000203,Água Clara,-20.4452,-52.879,false,50
+5000252,Alcinópolis,-18.3255,-53.7042,false,50
+5100250,Alta Floresta,-9.86674,-56.0867,false,51
+5100300,Alto Araguaia,-17.3153,-53.2181,false,51
+5100359,Alto Boa Vista,-11.6732,-51.3883,false,51
+5100409,Alto Garças,-16.9462,-53.5272,false,51
+5100508,Alto Paraguai,-14.5137,-56.4776,false,51
+5100607,Alto Taquari,-17.8241,-53.2792,false,51
+5000609,Amambai,-23.1058,-55.2253,false,50
+5000708,Anastácio,-20.4823,-55.8104,false,50
+5000807,Anaurilândia,-22.1852,-52.7191,false,50
+5000856,Angélica,-22.1527,-53.7708,false,50
+5000906,Antônio João,-22.1927,-55.9517,false,50
+5001003,Aparecida do Taboado,-20.0873,-51.0961,false,50
+5100805,Apiacás,-9.53981,-57.4587,false,51
+5001102,Aquidauana,-20.4666,-55.7868,false,50
+5101001,Araguaiana,-15.7291,-51.8341,false,51
+5101209,Araguainha,-16.857,-53.0318,false,51
+5001243,Aral Moreira,-22.9385,-55.6334,false,50
+5101258,Araputanga,-15.4641,-58.3425,false,51
+5101308,Arenápolis,-14.4472,-56.8437,false,51
+5101407,Aripuanã,-10.1723,-59.4568,false,51
+5001508,Bandeirantes,-19.9275,-54.3585,false,50
+5101605,Barão de Melgaço,-16.2067,-55.9623,false,51
+5101704,Barra do Bugres,-15.0702,-57.1878,false,51
+5101803,Barra do Garças,-15.8804,-52.264,false,51
+5001904,Bataguassu,-21.7159,-52.4221,false,50
+5002001,Batayporã,-22.2944,-53.2705,false,50
+5002100,Bela Vista,-22.1073,-56.5263,false,50
+5002159,Bodoquena,-20.537,-56.7127,false,50
+5101852,Bom Jesus do Araguaia,-12.1706,-51.5032,false,51
+5002209,Bonito,-21.1261,-56.4836,false,50
+5002308,Brasilândia,-21.2544,-52.0365,false,50
+5101902,Brasnorte,-12.1474,-57.9833,false,51
+5002407,Caarapó,-22.6368,-54.8209,false,50
+5102504,Cáceres,-16.0764,-57.6818,false,51
+5002605,Camapuã,-19.5347,-54.0431,false,50
+5102603,Campinápolis,-14.5162,-52.893,false,51
+5002704,Campo Grande,-20.4486,-54.6295,true,50
+5102637,Campo Novo do Parecis,-13.6587,-57.8907,false,51
+5102678,Campo Verde,-15.545,-55.1626,false,51
+5102686,Campos de Júlio,-13.7242,-59.2858,false,51
+5102694,Canabrava do Norte,-11.0556,-51.8209,false,51
+5102702,Canarana,-13.5515,-52.2705,false,51
+5002803,Caracol,-22.011,-57.0277,false,50
+5102793,Carlinda,-9.94912,-55.8417,false,51
+5002902,Cassilândia,-19.1179,-51.7313,false,50
+5102850,Castanheira,-11.1251,-58.6081,false,51
+5103007,Chapada dos Guimarães,-15.4643,-55.7499,false,51
+5002951,Chapadão do Sul,-18.788,-52.6263,false,50
+5103056,Cláudia,-11.5075,-54.8835,false,51
+5103106,Cocalinho,-14.3903,-51.0001,false,51
+5103205,Colíder,-10.8135,-55.461,false,51
+5103254,Colniza,-9.46121,-59.2252,false,51
+5103304,Comodoro,-13.6614,-59.7848,false,51
+5103353,Confresa,-10.6437,-51.5699,false,51
+5103361,Conquista D'Oeste,-14.5381,-59.5444,false,51
+5003108,Corguinho,-19.8243,-54.8281,false,50
+5003157,Coronel Sapucaia,-23.2724,-55.5278,false,50
+5003207,Corumbá,-19.0077,-57.651,false,50
+5003256,Costa Rica,-18.5432,-53.1287,false,50
+5103379,Cotriguaçu,-9.85656,-58.4192,false,51
+5003306,Coxim,-18.5013,-54.751,false,50
+5103403,Cuiabá,-15.601,-56.0974,true,51
+5103437,Curvelândia,-15.6084,-57.9133,false,51
+5103452,Denise,-14.7324,-57.0583,false,51
+5003454,Deodápolis,-22.2763,-54.1682,false,50
+5103502,Diamantino,-14.4037,-56.4366,false,51
+5003488,Dois Irmãos do Buriti,-20.6848,-55.2915,false,50
+5103601,Dom Aquino,-15.8099,-54.9223,false,51
+5003504,Douradina,-22.0405,-54.6158,false,50
+5003702,Dourados,-22.2231,-54.812,false,50
+5003751,Eldorado,-23.7868,-54.2838,false,50
+5003801,Fátima do Sul,-22.3789,-54.5131,false,50
+5103700,Feliz Natal,-12.385,-54.9227,false,51
+5003900,Figueirão,-18.6782,-53.638,false,50
+5103809,Figueirópolis D'Oeste,-15.4439,-58.7391,false,51
+5103858,Gaúcha do Norte,-13.2443,-53.0809,false,51
+5103908,General Carneiro,-15.7094,-52.7574,false,51
+5103957,Glória D'Oeste,-15.768,-58.3108,false,51
+5004007,Glória de Dourados,-22.4136,-54.2335,false,50
+5104104,Guarantã do Norte,-9.96218,-54.9121,false,51
+5004106,Guia Lopes da Laguna,-21.4583,-56.1117,false,50
+5104203,Guiratinga,-16.346,-53.7575,false,51
+5004304,Iguatemi,-23.6736,-54.5637,false,50
+5104500,Indiavaí,-15.4921,-58.5802,false,51
+5004403,Inocência,-19.7277,-51.9281,false,50
+5104526,Ipiranga do Norte,-12.2408,-56.1531,false,51
+5104542,Itanhangá,-12.2259,-56.6463,false,51
+5004502,Itaporã,-22.08,-54.7934,false,50
+5004601,Itaquiraí,-23.4779,-54.187,false,50
+5104559,Itaúba,-11.0614,-55.2766,false,51
+5104609,Itiquira,-17.2147,-54.1422,false,51
+5004700,Ivinhema,-22.3046,-53.8184,false,50
+5104807,Jaciara,-15.9548,-54.9733,false,51
+5104906,Jangada,-15.235,-56.4917,false,51
+5004809,Japorã,-23.8903,-54.4059,false,50
+5004908,Jaraguari,-20.1386,-54.3996,false,50
+5005004,Jardim,-21.4799,-56.1489,false,50
+5005103,Jateí,-22.4806,-54.3079,false,50
+5105002,Jauru,-15.3342,-58.8723,false,51
+5105101,Juara,-11.2639,-57.5244,false,51
+5105150,Juína,-11.3728,-58.7483,false,51
+5105176,Juruena,-10.3178,-58.3592,false,51
+5105200,Juscimeira,-16.0633,-54.8859,false,51
+5005152,Juti,-22.8596,-54.6061,false,50
+5005202,Ladário,-19.0089,-57.5973,false,50
+5005251,Laguna Carapã,-22.5448,-55.1502,false,50
+5105234,Lambari D'Oeste,-15.3188,-58.0046,false,51
+5105259,Lucas do Rio Verde,-13.0588,-55.9042,false,51
+5105309,Luciara,-11.2219,-50.6676,false,51
+5005400,Maracaju,-21.6105,-55.1678,false,50
+5105580,Marcelândia,-11.0463,-54.4377,false,51
+5105606,Matupá,-10.1821,-54.9467,false,51
+5005608,Miranda,-20.2355,-56.3746,false,50
+5105622,Mirassol d'Oeste,-15.6759,-58.0951,false,51
+5005681,Mundo Novo,-23.9355,-54.281,false,50
+5005707,Naviraí,-23.0618,-54.1995,false,50
+5005806,Nioaque,-21.1419,-55.8296,false,50
+5105903,Nobres,-14.7192,-56.3284,false,51
+5106000,Nortelândia,-14.454,-56.7945,false,51
+5106109,Nossa Senhora do Livramento,-15.772,-56.3432,false,51
+5006002,Nova Alvorada do Sul,-21.4657,-54.3825,false,50
+5006200,Nova Andradina,-22.238,-53.3437,false,50
+5106158,Nova Bandeirantes,-9.84977,-57.8139,false,51
+5106208,Nova Brasilândia,-14.9612,-54.9685,false,51
+5106216,Nova Canaã do Norte,-10.558,-55.953,false,51
+5108808,Nova Guarita,-10.312,-55.4061,false,51
+5106182,Nova Lacerda,-14.4727,-59.6001,false,51
+5108857,Nova Marilândia,-14.3568,-56.9696,false,51
+5108907,Nova Maringá,-13.0136,-57.0908,false,51
+5108956,Nova Monte Verde,-9.99998,-57.5261,false,51
+5106224,Nova Mutum,-13.8374,-56.0743,false,51
+5106174,Nova Nazaré,-13.9486,-51.8002,false,51
+5106232,Nova Olímpia,-14.7889,-57.2886,false,51
+5106190,Nova Santa Helena,-10.8651,-55.1872,false,51
+5106240,Nova Ubiratã,-12.9834,-55.2556,false,51
+5106257,Nova Xavantina,-14.6771,-52.3502,false,51
+5106273,Novo Horizonte do Norte,-11.4089,-57.3488,false,51
+5006259,Novo Horizonte do Sul,-22.6693,-53.8601,false,50
+5106265,Novo Mundo,-9.95616,-55.2029,false,51
+5106315,Novo Santo Antônio,-12.2875,-50.9686,false,51
+5106281,Novo São Joaquim,-14.9054,-53.0194,false,51
+5006275,Paraíso das Águas,-19.0216,-53.0116,false,50
+5006309,Paranaíba,-19.6746,-51.1909,false,50
+5106299,Paranaíta,-9.65835,-56.4786,false,51
+5106307,Paranatinga,-14.4265,-54.0524,false,51
+5006358,Paranhos,-23.8911,-55.429,false,50
+5106372,Pedra Preta,-16.6245,-54.4722,false,51
+5006408,Pedro Gomes,-18.0996,-54.5507,false,50
+5106422,Peixoto de Azevedo,-10.2262,-54.9794,false,51
+5106455,Planalto da Serra,-14.6518,-54.7819,false,51
+5106505,Poconé,-16.266,-56.6261,false,51
+5006606,Ponta Porã,-22.5296,-55.7203,false,50
+5106653,Pontal do Araguaia,-15.9274,-52.3273,false,51
+5106703,Ponte Branca,-16.7584,-52.8369,false,51
+5106752,Pontes e Lacerda,-15.2219,-59.3435,false,51
+5106778,Porto Alegre do Norte,-10.8761,-51.6357,false,51
+5106802,Porto dos Gaúchos,-11.533,-57.4132,false,51
+5106828,Porto Esperidião,-15.857,-58.4619,false,51
+5106851,Porto Estrela,-15.3235,-57.2204,false,51
+5006903,Porto Murtinho,-21.6981,-57.8836,false,50
+5107008,Poxoréu,-15.8299,-54.4208,false,51
+5107040,Primavera do Leste,-15.544,-54.2811,false,51
+5107065,Querência,-12.6093,-52.1821,false,51
+5107156,Reserva do Cabaçal,-15.0743,-58.4585,false,51
+5007109,Ribas do Rio Pardo,-20.4445,-53.7588,false,50
+5107180,Ribeirão Cascalheira,-12.9367,-51.8244,false,51
+5107198,Ribeirãozinho,-16.4856,-52.6924,false,51
+5107206,Rio Branco,-15.2483,-58.1259,false,51
+5007208,Rio Brilhante,-21.8033,-54.5427,false,50
+5007307,Rio Negro,-19.447,-54.9859,false,50
+5007406,Rio Verde de Mato Grosso,-18.9249,-54.8434,false,50
+5007505,Rochedo,-19.9565,-54.8848,false,50
+5107578,Rondolândia,-10.8376,-61.4697,false,51
+5107602,Rondonópolis,-16.4673,-54.6372,false,51
+5107701,Rosário Oeste,-14.8259,-56.4236,false,51
+5107750,Salto do Céu,-15.1303,-58.1317,false,51
+5107248,Santa Carmem,-11.9125,-55.2263,false,51
+5107743,Santa Cruz do Xingu,-10.1532,-52.3953,false,51
+5007554,Santa Rita do Pardo,-21.3016,-52.8333,false,50
+5107768,Santa Rita do Trivelato,-13.8146,-55.2706,false,51
+5107776,Santa Terezinha,-10.4704,-50.514,false,51
+5107263,Santo Afonso,-14.4945,-57.0091,false,51
+5107792,Santo Antônio do Leste,-14.805,-53.6075,false,51
+5107800,Santo Antônio do Leverger,-15.8632,-56.0788,false,51
+5107859,São Félix do Araguaia,-11.615,-50.6706,false,51
+5007695,São Gabriel do Oeste,-19.3889,-54.5507,false,50
+5107297,São José do Povo,-16.4549,-54.2487,false,51
+5107305,São José do Rio Claro,-13.4398,-56.7218,false,51
+5107354,São José do Xingu,-10.7982,-52.7486,false,51
+5107107,São José dos Quatro Marcos,-15.6276,-58.1772,false,51
+5107404,São Pedro da Cipa,-16.0109,-54.9176,false,51
+5107875,Sapezal,-12.9892,-58.7645,false,51
+5007802,Selvíria,-20.3637,-51.4192,false,50
+5107883,Serra Nova Dourada,-12.0896,-51.4025,false,51
+5007703,Sete Quedas,-23.9705,-55.0398,false,50
+5007901,Sidrolândia,-20.9302,-54.9692,false,50
+5107909,Sinop,-11.8604,-55.5091,false,51
+5007935,Sonora,-17.5698,-54.7551,false,50
+5107925,Sorriso,-12.5425,-55.7211,false,51
+5107941,Tabaporã,-11.3007,-56.8312,false,51
+5007950,Tacuru,-23.636,-55.0141,false,50
+5107958,Tangará da Serra,-14.6229,-57.4933,false,51
+5108006,Tapurah,-12.695,-56.5178,false,51
+5007976,Taquarussu,-22.4898,-53.3519,false,50
+5008008,Terenos,-20.4378,-54.8647,false,50
+5108055,Terra Nova do Norte,-10.517,-55.231,false,51
+5108105,Tesouro,-16.0809,-53.559,false,51
+5108204,Torixoréu,-16.2006,-52.5571,false,51
+5008305,Três Lagoas,-20.7849,-51.7007,false,50
+5108303,União do Sul,-11.5308,-54.3616,false,51
+5108352,Vale de São Domingos,-15.286,-59.0683,false,51
+5108402,Várzea Grande,-15.6458,-56.1322,false,51
+5108501,Vera,-12.3017,-55.3045,false,51
+5008404,Vicentina,-22.4098,-54.4415,false,50
+5105507,Vila Bela da Santíssima Trindade,-15.0068,-59.9504,false,51
+5108600,Vila Rica,-10.0137,-51.1186,false,51
