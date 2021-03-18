@@ -87,59 +87,519 @@ def search_city():
     return dados_json
 
 
-@app.route('/cidades')
-def random_cities():
+@app.route('/leste')
+def random_leste():
     API_KEY = '3bc9b1c2c07e4f4dad648c37e3039f3a'
 
-    campogrande = ['Corguinho', 'Bandeirantes', 'Rochedo', 'Ribas do Rio Pardo', 'Terenos',
-                   'jaraguari', 'dois irmãos do buriti', 'Sidrolândia', 'nova alvorada do sul']
+    leste = ['bataguassu', 'Angélica', 'ivinhema', 'novo horizonte do sul',
+             'anaurilândia', 'Bataiporã', 'Taquarussu','Cassilândia', 'inocência', 'Paranaíba',
+             'Aparecida do Taboado', 'Água Clara', 'Santa Rita do Pardo', 'Ribas do Rio Pardo',
+             'Brasilândia']
 
-    grandedourados = ['Maracaju', 'Rio Brilhante', 'Itaporã', 'douradina', 'Dourados', 'jateí',
-                      'fátima do sul', 'deodápolis', 'Caarapó', 'Vicentina', 'glória de dourados']
+    cidades = random.sample(leste, 5)
 
-    bolsao = ['Juti', 'Naviraí', 'itaquiraí', 'Iguatemi', 'Japorã', 'Eldorado', 'Mundo Novo']
+    x = 0
+    output_list = []
+    while x < 5:
+        city = cidades[x]
+        url2 = f'http://api.openweathermap.org/data/2.5/weather?q={city}&APPID={API_KEY}'
+        response = requests.get(url2).json()
 
-    conesul = ['chapadão do sul', 'Cassilândia', 'Paraíso das Águas', 'inocência', 'Paranaíba',
-               'Aparecida do Taboado', 'Água Clara', 'Três Lagoas', 'Santa Rita do Pardo', 'Brasilândia']
+        if response.get('cod') != 200:
+            municipio = [city.title()]
+            municipios = pd.read_csv("municipios_rmc.csv")
+            lat = municipios['latitude'].loc[municipios['nome'].isin(municipio)]
+            lat = float(lat)
+            lon = municipios['longitude'].loc[municipios['nome'].isin(municipio)]
+            lon = float(lon)
+            url3 = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&APPID={API_KEY}'
+            response_2 = requests.get(url3).json()
+            current_temperature = response_2.get('main', {}).get('temp')
+            current_temperature_celsius = round(current_temperature - 273.15, 2)
 
-    pantanal = ['Corumbá', 'Ladário', 'Miranda', 'Aquidauana', 'Anastácio']
+            min_temperature = response_2.get('main', {}).get('temp_min')
+            min_temperature_celsius = round(min_temperature - 273.15, 2)
 
-    leste = ['bataguassu', 'Nova Andradina', 'Angélica', 'ivinhema', 'novo horizonte do sul',
-             'anaurilândia', 'Bataiporã', 'Taquarussu']
+            max_temperature = response_2.get('main', {}).get('temp_max')
+            max_temperature_celsius = round(max_temperature - 273.15, 2)
 
-    norte = ['Sonora', 'Pedro Gomes', 'Coxim', 'Rio Verde de Mato Grosso', 'são gabriel do oeste',
-             'Rio Negro', 'Camapuã', 'alcinópolis', 'Costa Rica', 'Figueirão']
+            humidity = response_2.get('main', {}).get('humidity')
 
-    sudoeste = ['Porto Murtinho', 'Bonito', 'bodoquena', 'Caracol', 'Jardim', 'Bela Vista', 'Nioaque',
-                'Guia Lopes da Laguna']
+            weather = response_2.get('weather', {})
 
-    sulfronteira = ['antônio joão', 'Ponta Porã', 'Laguna Carapã', 'Aral Moreira', 'Amambai',
-                    'Coronel Sapucaia', 'Taçuru', 'Paranhos', 'Sete Quedas']
+            df = pd.DataFrame(weather)
+            new_dict = pd.DataFrame.to_dict(df)
 
-    regioes = ['campogrande', 'grandedourados', 'bolsao', 'conesul', 'pantanal', 'leste',
-               'norte', 'sudoeste', 'sulfronteira']
+            clima = json.dumps(new_dict['main'])
+            clima = clima[6:len(clima) - 1]
 
-    regiao = random.sample(regioes, 1)
+            descricao = json.dumps(new_dict['description'])
+            descricao = descricao[6:len(descricao) - 1]
 
-    for i in regiao:
-        if i == 'campogrande':
-            cidades = random.sample(campogrande, 5)
-        elif i == 'grandedourados':
-            cidades = random.sample(grandedourados, 5)
-        elif i == 'bolsao':
-            cidades = random.sample(bolsao, 5)
-        elif i == 'conesul':
-            cidades = random.sample(conesul, 5)
-        elif i == 'pantanal':
-            cidades = random.sample(pantanal, 5)
-        elif i == 'leste':
-            cidades = random.sample(leste, 5)
-        elif i == 'norte':
-            cidades = random.sample(norte, 5)
-        elif i == 'sudoeste':
-            cidades = random.sample(sudoeste, 5)
+            if clima == "\"Rain\"":
+                mm = response.get('rain', {}).get('1h')
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'mm de chuva': mm,
+                    'descricao': descricao
+                }
+            else:
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'descricao': descricao
+                }
+
+            output_list.append(dados)
+
         else:
-            cidades = random.sample(sulfronteira, 5)
+            current_temperature = response.get('main', {}).get('temp')
+            current_temperature_celsius = round(current_temperature - 273.15, 2)
+
+            min_temperature = response.get('main', {}).get('temp_min')
+            min_temperature_celsius = round(min_temperature - 273.15, 2)
+
+            max_temperature = response.get('main', {}).get('temp_max')
+            max_temperature_celsius = round(max_temperature - 273.15, 2)
+
+            humidity = response.get('main', {}).get('humidity')
+
+            weather = response.get('weather', {})
+
+            df = pd.DataFrame(weather)
+            new_dict = pd.DataFrame.to_dict(df)
+
+            clima = json.dumps(new_dict['main'])
+            clima = clima[6:len(clima) - 1]
+
+            descricao = json.dumps(new_dict['description'])
+            descricao = descricao[6:len(descricao) - 1]
+
+            if clima == "\"Rain\"":
+                mm = response.get('rain', {}).get('1h')
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'mm de chuva': mm,
+                    'descricao': descricao
+                }
+            else:
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'descricao': descricao
+                }
+
+            output_list.append(dados)
+        dados_json = json.dumps(output_list)
+        x = x + 1
+
+    return dados_json
+
+
+@app.route('/oeste')
+def random_oeste():
+    API_KEY = '3bc9b1c2c07e4f4dad648c37e3039f3a'
+
+    oeste = ['Ladário', 'Miranda', 'Aquidauana', 'Anastácio',
+             'Porto Murtinho', 'Bonito', 'bodoquena', 'Caracol', 'Jardim',
+             'Bela Vista', 'Nioaque','Guia Lopes da Laguna']
+
+    cidades = random.sample(oeste, 5)
+
+    x = 0
+    output_list = []
+    while x < 5:
+        city = cidades[x]
+        url2 = f'http://api.openweathermap.org/data/2.5/weather?q={city}&APPID={API_KEY}'
+        response = requests.get(url2).json()
+
+        if response.get('cod') != 200:
+            municipio = [city.title()]
+            municipios = pd.read_csv("municipios_rmc.csv")
+            lat = municipios['latitude'].loc[municipios['nome'].isin(municipio)]
+            lat = float(lat)
+            lon = municipios['longitude'].loc[municipios['nome'].isin(municipio)]
+            lon = float(lon)
+            url3 = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&APPID={API_KEY}'
+            response_2 = requests.get(url3).json()
+            current_temperature = response_2.get('main', {}).get('temp')
+            current_temperature_celsius = round(current_temperature - 273.15, 2)
+
+            min_temperature = response_2.get('main', {}).get('temp_min')
+            min_temperature_celsius = round(min_temperature - 273.15, 2)
+
+            max_temperature = response_2.get('main', {}).get('temp_max')
+            max_temperature_celsius = round(max_temperature - 273.15, 2)
+
+            humidity = response_2.get('main', {}).get('humidity')
+
+            weather = response_2.get('weather', {})
+
+            df = pd.DataFrame(weather)
+            new_dict = pd.DataFrame.to_dict(df)
+
+            clima = json.dumps(new_dict['main'])
+            clima = clima[6:len(clima) - 1]
+
+            descricao = json.dumps(new_dict['description'])
+            descricao = descricao[6:len(descricao) - 1]
+
+            if clima == "\"Rain\"":
+                mm = response.get('rain', {}).get('1h')
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'mm de chuva': mm,
+                    'descricao': descricao
+                }
+            else:
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'descricao': descricao
+                }
+
+            output_list.append(dados)
+
+        else:
+            current_temperature = response.get('main', {}).get('temp')
+            current_temperature_celsius = round(current_temperature - 273.15, 2)
+
+            min_temperature = response.get('main', {}).get('temp_min')
+            min_temperature_celsius = round(min_temperature - 273.15, 2)
+
+            max_temperature = response.get('main', {}).get('temp_max')
+            max_temperature_celsius = round(max_temperature - 273.15, 2)
+
+            humidity = response.get('main', {}).get('humidity')
+
+            weather = response.get('weather', {})
+
+            df = pd.DataFrame(weather)
+            new_dict = pd.DataFrame.to_dict(df)
+
+            clima = json.dumps(new_dict['main'])
+            clima = clima[6:len(clima) - 1]
+
+            descricao = json.dumps(new_dict['description'])
+            descricao = descricao[6:len(descricao) - 1]
+
+            if clima == "\"Rain\"":
+                mm = response.get('rain', {}).get('1h')
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'mm de chuva': mm,
+                    'descricao': descricao
+                }
+            else:
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'descricao': descricao
+                }
+
+            output_list.append(dados)
+        dados_json = json.dumps(output_list)
+        x = x + 1
+
+    return dados_json
+
+
+@app.route('/central')
+def random_central():
+    API_KEY = '3bc9b1c2c07e4f4dad648c37e3039f3a'
+
+    central = ['Rio Negro', 'Corguinho', 'Rochedo', 'Terenos',
+               'jaraguari', 'dois irmãos do buriti', 'Sidrolândia', 'nova alvorada do sul']
+
+    cidades = random.sample(central, 5)
+
+    x = 0
+    output_list = []
+    while x < 5:
+        city = cidades[x]
+        url2 = f'http://api.openweathermap.org/data/2.5/weather?q={city}&APPID={API_KEY}'
+        response = requests.get(url2).json()
+
+        if response.get('cod') != 200:
+            municipio = [city.title()]
+            municipios = pd.read_csv("municipios_rmc.csv")
+            lat = municipios['latitude'].loc[municipios['nome'].isin(municipio)]
+            lat = float(lat)
+            lon = municipios['longitude'].loc[municipios['nome'].isin(municipio)]
+            lon = float(lon)
+            url3 = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&APPID={API_KEY}'
+            response_2 = requests.get(url3).json()
+            current_temperature = response_2.get('main', {}).get('temp')
+            current_temperature_celsius = round(current_temperature - 273.15, 2)
+
+            min_temperature = response_2.get('main', {}).get('temp_min')
+            min_temperature_celsius = round(min_temperature - 273.15, 2)
+
+            max_temperature = response_2.get('main', {}).get('temp_max')
+            max_temperature_celsius = round(max_temperature - 273.15, 2)
+
+            humidity = response_2.get('main', {}).get('humidity')
+
+            weather = response_2.get('weather', {})
+
+            df = pd.DataFrame(weather)
+            new_dict = pd.DataFrame.to_dict(df)
+
+            clima = json.dumps(new_dict['main'])
+            clima = clima[6:len(clima) - 1]
+
+            descricao = json.dumps(new_dict['description'])
+            descricao = descricao[6:len(descricao) - 1]
+
+            if clima == "\"Rain\"":
+                mm = response.get('rain', {}).get('1h')
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'mm de chuva': mm,
+                    'descricao': descricao
+                }
+            else:
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'descricao': descricao
+                }
+
+            output_list.append(dados)
+
+        else:
+            current_temperature = response.get('main', {}).get('temp')
+            current_temperature_celsius = round(current_temperature - 273.15, 2)
+
+            min_temperature = response.get('main', {}).get('temp_min')
+            min_temperature_celsius = round(min_temperature - 273.15, 2)
+
+            max_temperature = response.get('main', {}).get('temp_max')
+            max_temperature_celsius = round(max_temperature - 273.15, 2)
+
+            humidity = response.get('main', {}).get('humidity')
+
+            weather = response.get('weather', {})
+
+            df = pd.DataFrame(weather)
+            new_dict = pd.DataFrame.to_dict(df)
+
+            clima = json.dumps(new_dict['main'])
+            clima = clima[6:len(clima) - 1]
+
+            descricao = json.dumps(new_dict['description'])
+            descricao = descricao[6:len(descricao) - 1]
+
+            if clima == "\"Rain\"":
+                mm = response.get('rain', {}).get('1h')
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'mm de chuva': mm,
+                    'descricao': descricao
+                }
+            else:
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'descricao': descricao
+                }
+
+            output_list.append(dados)
+        dados_json = json.dumps(output_list)
+        x = x + 1
+
+    return dados_json
+
+@app.route('/norte')
+def random_norte():
+    API_KEY = '3bc9b1c2c07e4f4dad648c37e3039f3a'
+
+    norte = ['Paraíso das Águas', 'chapadão do sul', 'Sonora', 'Pedro Gomes',
+             'Coxim', 'Rio Verde de Mato Grosso', 'são gabriel do oeste',
+             'Camapuã', 'alcinópolis', 'Costa Rica', 'Figueirão', 'Bandeirantes']
+
+    cidades = random.sample(norte, 5)
+
+    x = 0
+    output_list = []
+    while x < 5:
+        city = cidades[x]
+        url2 = f'http://api.openweathermap.org/data/2.5/weather?q={city}&APPID={API_KEY}'
+        response = requests.get(url2).json()
+
+        if response.get('cod') != 200:
+            municipio = [city.title()]
+            municipios = pd.read_csv("municipios_rmc.csv")
+            lat = municipios['latitude'].loc[municipios['nome'].isin(municipio)]
+            lat = float(lat)
+            lon = municipios['longitude'].loc[municipios['nome'].isin(municipio)]
+            lon = float(lon)
+            url3 = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&APPID={API_KEY}'
+            response_2 = requests.get(url3).json()
+            current_temperature = response_2.get('main', {}).get('temp')
+            current_temperature_celsius = round(current_temperature - 273.15, 2)
+
+            min_temperature = response_2.get('main', {}).get('temp_min')
+            min_temperature_celsius = round(min_temperature - 273.15, 2)
+
+            max_temperature = response_2.get('main', {}).get('temp_max')
+            max_temperature_celsius = round(max_temperature - 273.15, 2)
+
+            humidity = response_2.get('main', {}).get('humidity')
+
+            weather = response_2.get('weather', {})
+
+            df = pd.DataFrame(weather)
+            new_dict = pd.DataFrame.to_dict(df)
+
+            clima = json.dumps(new_dict['main'])
+            clima = clima[6:len(clima) - 1]
+
+            descricao = json.dumps(new_dict['description'])
+            descricao = descricao[6:len(descricao) - 1]
+
+            if clima == "\"Rain\"":
+                mm = response.get('rain', {}).get('1h')
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'mm de chuva': mm,
+                    'descricao': descricao
+                }
+            else:
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'descricao': descricao
+                }
+
+            output_list.append(dados)
+
+        else:
+            current_temperature = response.get('main', {}).get('temp')
+            current_temperature_celsius = round(current_temperature - 273.15, 2)
+
+            min_temperature = response.get('main', {}).get('temp_min')
+            min_temperature_celsius = round(min_temperature - 273.15, 2)
+
+            max_temperature = response.get('main', {}).get('temp_max')
+            max_temperature_celsius = round(max_temperature - 273.15, 2)
+
+            humidity = response.get('main', {}).get('humidity')
+
+            weather = response.get('weather', {})
+
+            df = pd.DataFrame(weather)
+            new_dict = pd.DataFrame.to_dict(df)
+
+            clima = json.dumps(new_dict['main'])
+            clima = clima[6:len(clima) - 1]
+
+            descricao = json.dumps(new_dict['description'])
+            descricao = descricao[6:len(descricao) - 1]
+
+            if clima == "\"Rain\"":
+                mm = response.get('rain', {}).get('1h')
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'mm de chuva': mm,
+                    'descricao': descricao
+                }
+            else:
+                dados = {
+                    'cidade': city.title(),
+                    'temperatura': current_temperature_celsius,
+                    'minima': min_temperature_celsius,
+                    'maxima': max_temperature_celsius,
+                    'umidade do ar': humidity,
+                    'clima': clima,
+                    'descricao': descricao
+                }
+
+            output_list.append(dados)
+        dados_json = json.dumps(output_list)
+        x = x + 1
+
+    return dados_json
+
+@app.route('/sul')
+def random_sul():
+    API_KEY = '3bc9b1c2c07e4f4dad648c37e3039f3a'
+
+    sul = ['Maracaju', 'Rio Brilhante', 'Itaporã', 'douradina',  'jateí',
+           'fátima do sul', 'deodápolis', 'Caarapó', 'Vicentina', 'glória de dourados',
+           'Juti', 'Naviraí', 'itaquiraí', 'Iguatemi', 'Japorã', 'Eldorado', 'Mundo Novo',
+           'Nova Andradina', 'antônio joão', 'Laguna Carapã', 'Aral Moreira', 'Amambai',
+           'Coronel Sapucaia', 'Tacuru', 'Paranhos', 'Sete Quedas']
+
+    cidades = random.sample(sul, 5)
 
     x = 0
     output_list = []
