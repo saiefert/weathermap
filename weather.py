@@ -91,10 +91,10 @@ def search_city():
 def random_leste():
     API_KEY = 'b38e5304dac486c2728762b73c8ccf21'
 
-    leste = ['bataguassu', 'Angélica', 'ivinhema', 'novo horizonte do sul',
-             'anaurilândia', 'Batayporã', 'Taquarussu','Cassilândia', 'inocência', 'Paranaíba',
-             'Aparecida do Taboado', 'Água Clara', 'Santa Rita do Pardo', 'Ribas do Rio Pardo',
-             'Brasilândia']
+    leste = ['bataguassu', 'Angelica', 'ivinhema', 'novo horizonte do sul',
+             'anaurilandia', 'Bataypora', 'Taquarussu','Cassilandia', 'inocencia', 'Paranaiba',
+             'Aparecida do Taboado', 'Agua Clara', 'Santa Rita do Pardo', 'Ribas do Rio Pardo',
+             'Brasilandia']
 
     cidades = random.sample(leste, 5)
 
@@ -104,12 +104,12 @@ def random_leste():
     while x < 5:
         city = cidades[x]
         municipio = [city.title()]
-        municipios = pd.read_csv('municipios_rmc.csv')
+        municipios = pd.read_csv('municipios_ms.csv')
 
-        lat = municipios['latitude'].loc[municipios['nome'].isin(municipio)]
+        lat = municipios['latitude'].loc[municipios['cidade'].isin(municipio)]
         lat = lat.values
         lat = lat[0]
-        lon = municipios['longitude'].loc[municipios['nome'].isin(municipio)]
+        lon = municipios['longitude'].loc[municipios['cidade'].isin(municipio)]
         lon = lon.values
         lon = lon[0]
 
@@ -132,7 +132,11 @@ def random_leste():
         clima_hoje = tempo_hoje['main']
         descricao_hoje = tempo_hoje['description']
         pop_hoje = hoje['pop']
-        chuva_hoje = hoje.rain
+        if 'rain' in hoje:
+            chuva_hoje = hoje.rain
+            chuva_hoje = float(chuva_hoje)
+        else:
+            chuva_hoje = None
         # fim dos dados do clima hoje
 
         # inicio dos dados do clima amanha
@@ -145,8 +149,11 @@ def random_leste():
         clima_amanha = tempo_amanha['main']
         descricao_amanha = tempo_amanha['description']
         pop_amanha = amanha['pop']
-        chuva_amanha = amanha.rain
-
+        if 'rain' in amanha:
+            chuva_amanha = amanha.rain
+            chuva_amanha = float(chuva_amanha)
+        else:
+            chuva_amanha = None
 
         dados = {
             'cidade': city.title(),
@@ -158,7 +165,7 @@ def random_leste():
             'clima_hoje': clima_hoje,
             'descricao_clima_hoje': descricao_hoje,
             'possibilidade_de_chuva_hoje': float(pop_hoje),
-            'precipitacao_hoje': float(chuva_hoje),
+            'precipitacao_hoje': chuva_hoje,
             'amanha': 'amanha',
             'temp_dia_amanha': float(temp_amanha),
             'minima_amanha': float(min_amanha),
@@ -167,7 +174,7 @@ def random_leste():
             'clima_amanha': clima_amanha,
             'descricao_clima_amanha': descricao_amanha,
             'possibilidade_de_chuva_amanha': float(pop_amanha),
-            'precipitacao_amanha': float(chuva_amanha)
+            'precipitacao_amanha': chuva_amanha
         }
 
         output_list.append(dados)
@@ -181,7 +188,7 @@ def random_leste():
 def random_oeste():
     API_KEY = 'b38e5304dac486c2728762b73c8ccf21'
 
-    oeste = ['Ladário', 'Miranda', 'Aquidauana', 'Anastácio',
+    oeste = ['Ladario', 'Miranda', 'Aquidauana', 'Anastacio',
              'Porto Murtinho', 'Bonito', 'bodoquena', 'Caracol', 'Jardim',
              'Bela Vista', 'Nioaque','Guia Lopes da Laguna']
 
@@ -192,12 +199,12 @@ def random_oeste():
     while x < 5:
         city = cidades[x]
         municipio = [city.title()]
-        municipios = pd.read_csv('municipios_rmc.csv')
+        municipios = pd.read_csv('municipios_ms.csv')
 
-        lat = municipios['latitude'].loc[municipios['nome'].isin(municipio)]
+        lat = municipios['latitude'].loc[municipios['cidade'].isin(municipio)]
         lat = lat.values
         lat = lat[0]
-        lon = municipios['longitude'].loc[municipios['nome'].isin(municipio)]
+        lon = municipios['longitude'].loc[municipios['cidade'].isin(municipio)]
         lon = lon.values
         lon = lon[0]
 
@@ -220,7 +227,11 @@ def random_oeste():
         clima_hoje = tempo_hoje['main']
         descricao_hoje = tempo_hoje['description']
         pop_hoje = hoje['pop']
-        chuva_hoje = hoje.rain
+        if 'rain' in hoje:
+            chuva_hoje = hoje.rain
+            chuva_hoje = float(chuva_hoje)
+        else:
+            chuva_hoje = None
         # fim dos dados do clima hoje
 
         # inicio dos dados do clima amanha
@@ -233,8 +244,11 @@ def random_oeste():
         clima_amanha = tempo_amanha['main']
         descricao_amanha = tempo_amanha['description']
         pop_amanha = amanha['pop']
-        chuva_amanha = amanha.rain
-
+        if 'rain' in amanha:
+            chuva_amanha = amanha.rain
+            chuva_amanha = float(chuva_amanha)
+        else:
+            chuva_amanha = None
 
         dados = {
             'cidade': city.title(),
@@ -246,7 +260,7 @@ def random_oeste():
             'clima_hoje': clima_hoje,
             'descricao_clima_hoje': descricao_hoje,
             'possibilidade_de_chuva_hoje': float(pop_hoje),
-            'precipitacao_hoje': float(chuva_hoje),
+            'precipitacao_hoje': chuva_hoje,
             'amanha': 'amanha',
             'temp_dia_amanha': float(temp_amanha),
             'minima_amanha': float(min_amanha),
@@ -255,7 +269,7 @@ def random_oeste():
             'clima_amanha': clima_amanha,
             'descricao_clima_amanha': descricao_amanha,
             'possibilidade_de_chuva_amanha': float(pop_amanha),
-            'precipitacao_amanha': float(chuva_amanha)
+            'precipitacao_amanha': chuva_amanha
         }
 
         output_list.append(dados)
@@ -270,7 +284,7 @@ def random_central():
     API_KEY = 'b38e5304dac486c2728762b73c8ccf21'
 
     central = ['Rio Negro', 'Corguinho', 'Rochedo', 'Terenos',
-               'jaraguari', 'dois irmãos do buriti', 'Sidrolândia', 'nova alvorada do sul']
+               'jaraguari', 'dois irmaos do buriti', 'Sidrolandia', 'nova alvorada do sul']
 
     cidades = random.sample(central, 5)
 
@@ -279,12 +293,12 @@ def random_central():
     while x < 5:
         city = cidades[x]
         municipio = [city.title()]
-        municipios = pd.read_csv('municipios_rmc.csv')
+        municipios = pd.read_csv('municipios_ms.csv')
 
-        lat = municipios['latitude'].loc[municipios['nome'].isin(municipio)]
+        lat = municipios['latitude'].loc[municipios['cidade'].isin(municipio)]
         lat = lat.values
         lat = lat[0]
-        lon = municipios['longitude'].loc[municipios['nome'].isin(municipio)]
+        lon = municipios['longitude'].loc[municipios['cidade'].isin(municipio)]
         lon = lon.values
         lon = lon[0]
 
@@ -307,7 +321,11 @@ def random_central():
         clima_hoje = tempo_hoje['main']
         descricao_hoje = tempo_hoje['description']
         pop_hoje = hoje['pop']
-        chuva_hoje = hoje.rain
+        if 'rain' in hoje:
+            chuva_hoje = hoje.rain
+            chuva_hoje = float(chuva_hoje)
+        else:
+            chuva_hoje = None
         # fim dos dados do clima hoje
 
         # inicio dos dados do clima amanha
@@ -320,8 +338,11 @@ def random_central():
         clima_amanha = tempo_amanha['main']
         descricao_amanha = tempo_amanha['description']
         pop_amanha = amanha['pop']
-        chuva_amanha = amanha.rain
-
+        if 'rain' in amanha:
+            chuva_amanha = amanha.rain
+            chuva_amanha = float(chuva_amanha)
+        else:
+            chuva_amanha = None
 
         dados = {
             'cidade': city.title(),
@@ -333,7 +354,7 @@ def random_central():
             'clima_hoje': clima_hoje,
             'descricao_clima_hoje': descricao_hoje,
             'possibilidade_de_chuva_hoje': float(pop_hoje),
-            'precipitacao_hoje': float(chuva_hoje),
+            'precipitacao_hoje': chuva_hoje,
             'amanha': 'amanha',
             'temp_dia_amanha': float(temp_amanha),
             'minima_amanha': float(min_amanha),
@@ -342,7 +363,7 @@ def random_central():
             'clima_amanha': clima_amanha,
             'descricao_clima_amanha': descricao_amanha,
             'possibilidade_de_chuva_amanha': float(pop_amanha),
-            'precipitacao_amanha': float(chuva_amanha)
+            'precipitacao_amanha': chuva_amanha
         }
 
         output_list.append(dados)
@@ -355,9 +376,9 @@ def random_central():
 def random_norte():
     API_KEY = 'b38e5304dac486c2728762b73c8ccf21'
 
-    norte = ['Paraíso das Águas', 'chapadão do sul', 'Sonora', 'Pedro Gomes',
-             'Coxim', 'Rio Verde de Mato Grosso', 'são gabriel do oeste',
-             'Camapuã', 'alcinópolis', 'Costa Rica', 'Figueirão', 'Bandeirantes']
+    norte = ['Paraiso das Aguas', 'chapadao do sul', 'Sonora', 'Pedro Gomes',
+             'Coxim', 'Rio Verde de Mato Grosso', 'sao gabriel do oeste',
+             'Camapua', 'alcinopolis', 'Costa Rica', 'Figueirao', 'Bandeirantes']
 
     cidades = random.sample(norte, 5)
 
@@ -366,12 +387,13 @@ def random_norte():
     while x < 5:
         city = cidades[x]
         municipio = [city.title()]
-        municipios = pd.read_csv('municipios_rmc.csv')
+        print(municipio)
+        municipios = pd.read_csv('municipios_ms.csv')
 
-        lat = municipios['latitude'].loc[municipios['nome'].isin(municipio)]
+        lat = municipios['latitude'].loc[municipios['cidade'].isin(municipio)]
         lat = lat.values
         lat = lat[0]
-        lon = municipios['longitude'].loc[municipios['nome'].isin(municipio)]
+        lon = municipios['longitude'].loc[municipios['cidade'].isin(municipio)]
         lon = lon.values
         lon = lon[0]
 
@@ -394,7 +416,11 @@ def random_norte():
         clima_hoje = tempo_hoje['main']
         descricao_hoje = tempo_hoje['description']
         pop_hoje = hoje['pop']
-        chuva_hoje = hoje.rain
+        if 'rain' in hoje:
+            chuva_hoje = hoje.rain
+            chuva_hoje = float(chuva_hoje)
+        else:
+            chuva_hoje = None
         # fim dos dados do clima hoje
 
         # inicio dos dados do clima amanha
@@ -407,8 +433,11 @@ def random_norte():
         clima_amanha = tempo_amanha['main']
         descricao_amanha = tempo_amanha['description']
         pop_amanha = amanha['pop']
-        chuva_amanha = amanha.rain
-
+        if 'rain' in amanha:
+            chuva_amanha = amanha.rain
+            chuva_amanha = float(chuva_amanha)
+        else:
+            chuva_amanha = None
 
         dados = {
             'cidade': city.title(),
@@ -420,7 +449,7 @@ def random_norte():
             'clima_hoje': clima_hoje,
             'descricao_clima_hoje': descricao_hoje,
             'possibilidade_de_chuva_hoje': float(pop_hoje),
-            'precipitacao_hoje': float(chuva_hoje),
+            'precipitacao_hoje': chuva_hoje,
             'amanha': 'amanha',
             'temp_dia_amanha': float(temp_amanha),
             'minima_amanha': float(min_amanha),
@@ -429,7 +458,7 @@ def random_norte():
             'clima_amanha': clima_amanha,
             'descricao_clima_amanha': descricao_amanha,
             'possibilidade_de_chuva_amanha': float(pop_amanha),
-            'precipitacao_amanha': float(chuva_amanha)
+            'precipitacao_amanha': chuva_amanha
         }
 
         output_list.append(dados)
@@ -442,10 +471,10 @@ def random_norte():
 def random_sul():
     API_KEY = 'b38e5304dac486c2728762b73c8ccf21'
 
-    sul = ['Maracaju', 'Rio Brilhante', 'Itaporã', 'douradina',  'jateí',
-           'fátima do sul', 'deodápolis', 'Caarapó', 'Vicentina', 'glória de dourados',
-           'Juti', 'Naviraí', 'itaquiraí', 'Iguatemi', 'Japorã', 'Eldorado', 'Mundo Novo',
-           'Nova Andradina', 'antônio joão', 'Laguna Carapã', 'Aral Moreira', 'Amambai',
+    sul = ['Maracaju', 'Rio Brilhante', 'Itapora', 'douradina',  'jatei',
+           'fatima do sul', 'deodapolis', 'Caarapo', 'Vicentina', 'gloria de dourados',
+           'Juti', 'Navirai', 'itaquirai', 'Iguatemi', 'Japora', 'Eldorado', 'Mundo Novo',
+           'Nova Andradina', 'antonio joao', 'Laguna Carapa', 'Aral Moreira', 'Amambai',
            'Coronel Sapucaia', 'Tacuru', 'Paranhos', 'Sete Quedas']
 
     cidades = random.sample(sul, 5)
@@ -455,12 +484,12 @@ def random_sul():
     while x < 5:
         city = cidades[x]
         municipio = [city.title()]
-        municipios = pd.read_csv('municipios_rmc.csv')
+        municipios = pd.read_csv('municipios_ms.csv')
 
-        lat = municipios['latitude'].loc[municipios['nome'].isin(municipio)]
+        lat = municipios['latitude'].loc[municipios['cidade'].isin(municipio)]
         lat = lat.values
         lat = lat[0]
-        lon = municipios['longitude'].loc[municipios['nome'].isin(municipio)]
+        lon = municipios['longitude'].loc[municipios['cidade'].isin(municipio)]
         lon = lon.values
         lon = lon[0]
 
@@ -483,7 +512,11 @@ def random_sul():
         clima_hoje = tempo_hoje['main']
         descricao_hoje = tempo_hoje['description']
         pop_hoje = hoje['pop']
-        chuva_hoje = hoje.rain
+        if 'rain' in hoje:
+            chuva_hoje = hoje.rain
+            chuva_hoje = float(chuva_hoje)
+        else:
+            chuva_hoje = None
         # fim dos dados do clima hoje
 
         # inicio dos dados do clima amanha
@@ -496,8 +529,11 @@ def random_sul():
         clima_amanha = tempo_amanha['main']
         descricao_amanha = tempo_amanha['description']
         pop_amanha = amanha['pop']
-        chuva_amanha = amanha.rain
-
+        if 'rain' in amanha:
+            chuva_amanha = amanha.rain
+            chuva_amanha = float(chuva_amanha)
+        else:
+            chuva_amanha = None
 
         dados = {
             'cidade': city.title(),
@@ -509,7 +545,7 @@ def random_sul():
             'clima_hoje': clima_hoje,
             'descricao_clima_hoje': descricao_hoje,
             'possibilidade_de_chuva_hoje': float(pop_hoje),
-            'precipitacao_hoje': float(chuva_hoje),
+            'precipitacao_hoje': chuva_hoje,
             'amanha': 'amanha',
             'temp_dia_amanha': float(temp_amanha),
             'minima_amanha': float(min_amanha),
@@ -518,7 +554,7 @@ def random_sul():
             'clima_amanha': clima_amanha,
             'descricao_clima_amanha': descricao_amanha,
             'possibilidade_de_chuva_amanha': float(pop_amanha),
-            'precipitacao_amanha': float(chuva_amanha)
+            'precipitacao_amanha': chuva_amanha
         }
 
         output_list.append(dados)
