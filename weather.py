@@ -387,7 +387,6 @@ def random_norte():
     while x < 5:
         city = cidades[x]
         municipio = [city.title()]
-        print(municipio)
         municipios = pd.read_csv('municipios_ms.csv')
 
         lat = municipios['latitude'].loc[municipios['cidade'].isin(municipio)]
